@@ -1,0 +1,26 @@
+@startuml
+title "Authentication Flow with Cognito (OAuth + PKCE)"
+autonumber "<font color=LightSlateGrey>[0]"
+
+== Unauthenticated User ==
+
+Browser -> "ListLinksHandler Lambda": <b>GET</b> /links
+"ListLinksHandler Lambda" -> Browser: <font color=FireBrick><b>401</b> Unauthorized
+
+== OAuth Login Flow ==
+
+Browser -> Browser: Generate PKCE Code\nand Challenge (SHA256)
+Browser -> "Cognito": <b>GET</b> /oauth2/authorize (Client ID + PKCE Challenge)
+"Cognito" -> Browser: <font color=ForestGreen><b>200</b> Login UI
+Browser -> "Cognito": <b>POST</b> Username and Password
+"Cognito" -> Browser: <font color=ForestGreen><b>302</b> Redirect with Single-use Authorization Code
+Browser -> "AuthExchanger Lambda": <b>POST</b> Authorization Code + PKCE Code
+"AuthExchanger Lambda" -> "Cognito": <b>POST</b> /oauth2/token
+"Cognito" -> "AuthExchanger Lambda": <font color=ForestGreen><b>200</b> Multi-use JWT Access Token
+"AuthExchanger Lambda" -> Browser: <font color=ForestGreen><b>200</b> JWT Access Token as Http-Only Cookie
+
+== Authenticated User ==
+
+Browser -> "ListLinksHandler Lambda": <b>GET</b> /links
+"ListLinksHandler Lambda" -> Browser: <font color=ForestGreen><b>200</b> User's Short Links
+@enduml
