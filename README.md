@@ -9,11 +9,19 @@ https://liliput.mourjo.me
 ### Screenshots
 <table>
 
-<tr><td>Page</td><td>Screenshot</td></tr>
-<tr><td>Login</td><td><img src="src/test/resources/screenshot_login.png" width="400px"/></td></tr>
-<tr><td>Homepage</td><td><img src="src/test/resources/screenshot_welcome.png" width="400px"/></td></tr>
-<tr><td>Create Link</td><td><img src="src/test/resources/screenshot_create_link.png" width="400px"/></td></tr>
-<tr><td>Expand Link</td><td><img src="src/test/resources/screenshot_expand_link.png" width="400px"/></td></tr>
+<tr>
+    <td>Login Page</td>
+    <td>Login Page</td>
+    <td>Login Page</td>
+    <td>Login Page</td>
+</tr>
+<tr>
+    <td><img src="src/test/resources/screenshot_login.png" width="400px"/></td>
+    <td><img src="src/test/resources/screenshot_welcome.png" width="400px"/></td>
+    <td><img src="src/test/resources/screenshot_create_link.png" width="400px"/></td>
+    <td><img src="src/test/resources/screenshot_expand_link.png" width="400px"/></td>
+</tr>
+
 </table>
 
 # Implementation
