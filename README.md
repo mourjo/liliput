@@ -10,10 +10,10 @@ https://liliput.mourjo.me
 <table>
 
 <tr>
-    <td>Login Page</td>
-    <td>Login Page</td>
-    <td>Login Page</td>
-    <td>Login Page</td>
+    <td>Login</td>
+    <td>Home</td>
+    <td>Short Link Creation</td>
+    <td>Expand Link</td>
 </tr>
 <tr>
     <td><img src="src/test/resources/screenshot_login.png" width="400px"/></td>
