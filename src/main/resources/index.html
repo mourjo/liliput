@@ -266,7 +266,7 @@
         }
 
         const showLinks = async () => {
-            await fetch('/link', {
+            await fetch('/links', {
                 method: 'GET'
             }).then(async response => {
                 if (response.ok) {
@@ -306,7 +306,7 @@
                 });
 
             } else {
-                fetch('/link', {
+                fetch('/links', {
                     method: 'GET'
                 }).then(async response => {
                     if (!response.ok) {
@@ -363,7 +363,7 @@
                                 </div>
                                 <div class="textDescription-customizable " id="message-txt-1"></div>
 
-                                <form method="POST" onsubmit="createLink(event)">
+                                <form method="POST" onsubmit="createLink(event)" style="margin-bottom: 0px">
                                     <div>
                                         <input autocapitalize="none" class="link-input-element form-control inputField-customizable"
                                             id="inputLink-1" placeholder="Let's shorten a link!" required="" type="text" name="link-input-field">
@@ -372,7 +372,6 @@
                                     <input aria-label="submit" class="btn btn-primary submitButton-customizable"
                                         name="submitButton" type="Submit" value="Create Link">
                                     <br>
-
                                 </form>
 
                                 <table class="table links-table" style="display: none;">
@@ -386,7 +385,10 @@
                                     <tbody class="links-table-body">
                                     </tbody>
                                 </table>
-
+                                <hr style="margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom: 10px;"/>
+                                <div class="text-center text-muted">
+                                    <i>Mourjo Sen - <a target="_blank" href="https://github.com/mourjo/liliput">github.com/mourjo/liliput</a></i> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -430,7 +432,7 @@
                                     </div>
                                     <div class="textDescription-customizable " id="message-txt-2"></div>
 
-                                    <form method="POST" onsubmit="createLink(event)">
+                                    <form method="POST" onsubmit="createLink(event)" style="margin-bottom: 0px">
                                         <div>
                                             <input autocapitalize="none" class="link-input-element form-control inputField-customizable"
                                                 id="inputLink-2" placeholder="Let's shorten a link!" required=""
@@ -441,7 +443,6 @@
                                             name="submitButton" type="Submit" value="Create Link">
                                         <br>
                                     </form>
-
                                     <table class="table links-table" style="display: none;">
                                         <thead>
                                             <tr>
@@ -453,6 +454,10 @@
                                         <tbody class="links-table-body">
                                         </tbody>
                                     </table>
+                                    <hr style="margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom: 10px;"/>
+                                    <div class="text-center text-muted">
+                                         <i>Mourjo Sen - <a target="_blank" href="https://github.com/mourjo/liliput">github.com/mourjo/liliput</a></i> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
