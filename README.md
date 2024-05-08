@@ -15,7 +15,11 @@ https://liliput.mourjo.me
 https://liliput.mourjo.me
 
 
-https://github.com/mourjo/liliput/assets/10502323/963b2322-6f74-42b2-9b23-60ccaec8b341
+
+https://github.com/mourjo/liliput/assets/10502323/ec79c486-478a-41f8-ade8-1d5f0943a7c2
+
+
+
 
 
 
