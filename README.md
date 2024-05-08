@@ -13,7 +13,11 @@ https://liliput.mourjo.me
 
 # Demo
 https://liliput.mourjo.me
-![video](src/test/resources/liliput.mp4)
+
+
+https://github.com/mourjo/liliput/assets/10502323/963b2322-6f74-42b2-9b23-60ccaec8b341
+
+
 
 
 # Implementation
