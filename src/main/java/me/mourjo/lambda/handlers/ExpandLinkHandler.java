@@ -22,6 +22,8 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
     final DynamoDB dynamoDB = new DynamoDB(ddb);
     final Table table = dynamoDB.getTable(ParameterStore.dynamoDbTableName());
 
+    final int MAX_EXPANSIONS = 100;
+
     @Override
     public LambdaResponse handleRequest(Map<String, ?> input, Context context) {
         if (input.containsKey("path") && input.get("path") != null && input.get("path") instanceof String) {
@@ -32,6 +34,9 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
                 Item item = table.getItem(new PrimaryKey("key", shortLink));
                 if (item != null) {
                     String originalLink = item.getString("value");
+                    if (item.getInt("usageCount") > MAX_EXPANSIONS) {
+                        return LambdaResponse.builder().statusCode(404).body(Map.of("message", "Not found")).build();
+                    }
                     updateUsageCount(shortLink);
                     return LambdaResponse.builder().statusCode(302).locationHeader(originalLink).build();
                 }
