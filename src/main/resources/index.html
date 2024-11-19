@@ -190,7 +190,7 @@
             if (response.ok) {
                 let responseBody = await response.json();
                 let shortLink = shortLinkUrl(responseBody.shortLink);
-                showText(`Here's your short link <a target="_blank" href=${shortLink}>${shortLink}</a>`);
+                showText(`Here's your short link <a target="_blank" href=${shortLink}>${shortLink}</a>, you can expand it up to 25 times.`);
                 focusOnInput();
             } else {
                 if (response.status == 403 || response.status == 401) {

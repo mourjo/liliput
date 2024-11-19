@@ -12,6 +12,7 @@ import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import me.mourjo.dto.LambdaResponse;
+import me.mourjo.utils.HashedUsers;
 import me.mourjo.utils.ParameterStore;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
     final DynamoDB dynamoDB = new DynamoDB(ddb);
     final Table table = dynamoDB.getTable(ParameterStore.dynamoDbTableName());
 
-    final int MAX_EXPANSIONS = 100;
+    final int MAX_EXPANSIONS = 25;
 
     @Override
     public LambdaResponse handleRequest(Map<String, ?> input, Context context) {
@@ -32,11 +33,8 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
 
             if (shortLink != null) {
                 Item item = table.getItem(new PrimaryKey("key", shortLink));
-                if (item != null) {
+                if (item != null && isExpandable(item)) {
                     String originalLink = item.getString("value");
-                    if (item.getInt("usageCount") > MAX_EXPANSIONS) {
-                        return LambdaResponse.builder().statusCode(404).body(Map.of("message", "Not found")).build();
-                    }
                     updateUsageCount(shortLink);
                     return LambdaResponse.builder().statusCode(302).locationHeader(originalLink).build();
                 }
@@ -44,6 +42,11 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
         }
 
         return LambdaResponse.builder().statusCode(404).body(Map.of("message", "Not found")).build();
+    }
+
+    boolean isExpandable(Item item) {
+        return item.getInt("usageCount") < MAX_EXPANSIONS
+            || HashedUsers.isVerified(item.getString("user"));
     }
 
     void updateUsageCount(String shortLink) {
