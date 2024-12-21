@@ -1,18 +1,17 @@
 package me.mourjo.utils;
 
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.ssm.SsmClient;
-
 import java.util.HashMap;
 import java.util.Map;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.ssm.SsmClient;
 
 public class ParameterStore {
 
     private static ParameterStore instance;
     private final Map<String, String> cache = new HashMap<>();
     private final SsmClient ssmClient = SsmClient.builder()
-            .region(Region.US_EAST_2)
-            .build();
+        .region(Region.US_EAST_2)
+        .build();
 
     private ParameterStore() {
 

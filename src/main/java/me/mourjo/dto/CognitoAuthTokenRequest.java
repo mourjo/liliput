@@ -1,14 +1,14 @@
 package me.mourjo.dto;
 
-import lombok.Builder;
-
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Builder;
 
 @Builder
-public record CognitoAuthTokenRequest(String redirectUri, String grantType, String clientId, String code, String codeVerifier, String refreshToken) {
+public record CognitoAuthTokenRequest(String redirectUri, String grantType, String clientId,
+                                      String code, String codeVerifier, String refreshToken) {
 
     public String formEncodedBody() {
         List<String> bodyParts = new ArrayList<>();

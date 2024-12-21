@@ -1,6 +1,7 @@
 package me.mourjo.dto;
 
-public record CognitoAuthResponse(String id_token, String access_token, String refresh_token, String error) {
+public record CognitoAuthResponse(String id_token, String access_token, String refresh_token,
+                                  String error) {
 
     public String idToken() {
         return id_token;

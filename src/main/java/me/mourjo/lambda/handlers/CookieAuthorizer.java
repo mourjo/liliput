@@ -3,11 +3,10 @@ package me.mourjo.lambda.handlers;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import me.mourjo.cognito.CognitoTokenVerifier;
-import me.mourjo.utils.CookieUtils;
-
 import java.util.List;
 import java.util.Map;
+import me.mourjo.cognito.CognitoTokenVerifier;
+import me.mourjo.utils.CookieUtils;
 
 public class CookieAuthorizer implements RequestHandler<Map<String, ?>, Map<String, ?>> {
     // Input:
@@ -19,7 +18,8 @@ public class CookieAuthorizer implements RequestHandler<Map<String, ?>, Map<Stri
     public Map<String, ?> handleRequest(Map<String, ?> event, Context context) {
         final LambdaLogger logger = context.getLogger();
 
-        if (event != null && event.containsKey("authorizationToken") && event.containsKey("methodArn")) {
+        if (event != null && event.containsKey("authorizationToken") && event.containsKey(
+            "methodArn")) {
             String token = (String) event.get("authorizationToken");
             String methodArn = (String) event.get("methodArn");
             try {
@@ -54,18 +54,18 @@ public class CookieAuthorizer implements RequestHandler<Map<String, ?>, Map<Stri
     Map<String, ?> policy(String effect, String principal, String resource) {
         if (effect != null && resource != null) {
             var statement = Map.of(
-                    "Action", "execute-api:Invoke",
-                    "Effect", effect,
-                    "Resource", resource
+                "Action", "execute-api:Invoke",
+                "Effect", effect,
+                "Resource", resource
             );
 
             var policyDocument = Map.of(
-                    "Version", "2012-10-17",
-                    "Statement", List.of(statement));
+                "Version", "2012-10-17",
+                "Statement", List.of(statement));
 
             return Map.of(
-                    "principalId", principal,
-                    "policyDocument", policyDocument
+                "principalId", principal,
+                "policyDocument", policyDocument
             );
         }
 

@@ -1,13 +1,12 @@
 package me.mourjo.cognito;
 
-import me.mourjo.dto.Cookie;
-import me.mourjo.utils.CookieUtils;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import me.mourjo.dto.Cookie;
+import me.mourjo.utils.CookieUtils;
 
 public class TokenParser {
 
@@ -17,9 +16,11 @@ public class TokenParser {
     public Optional<String> emailFromHeaders(Map<String, ?> rawInput) {
 
         // principal sent by authorizer in requestContext
-        if (rawInput.containsKey("requestContext") && rawInput.get("requestContext") instanceof Map) {
+        if (rawInput.containsKey("requestContext") && rawInput.get(
+            "requestContext") instanceof Map) {
             Map<String, ?> requestContext = (Map<String, ?>) rawInput.get("requestContext");
-            if (requestContext.containsKey("authorizer") && requestContext.get("authorizer") instanceof Map) {
+            if (requestContext.containsKey("authorizer") && requestContext.get(
+                "authorizer") instanceof Map) {
                 Map<String, ?> authorizer = (Map<String, ?>) requestContext.get("authorizer");
                 if (authorizer.get("principalId") != null) {
                     return Optional.of((String) authorizer.get("principalId"));
@@ -51,18 +52,18 @@ public class TokenParser {
                         var cognitoResponse = exchanger.refreshAccessTokens(refreshToken.get());
                         if (!cognitoResponse.hasError()) {
                             var accessTokenCookie = Cookie.builder()
-                                    .name("access_token")
-                                    .value(cognitoResponse.accessToken())
-                                    .maxAge(Duration.ofHours(1).toSeconds())
-                                    .sameSite(Cookie.SameSite.STRICT)
-                                    .build();
+                                .name("access_token")
+                                .value(cognitoResponse.accessToken())
+                                .maxAge(Duration.ofHours(1).toSeconds())
+                                .sameSite(Cookie.SameSite.STRICT)
+                                .build();
 
                             var idTokenCookie = Cookie.builder()
-                                    .name("id_token")
-                                    .value(cognitoResponse.idToken())
-                                    .maxAge(Duration.ofHours(1).toSeconds())
-                                    .sameSite(Cookie.SameSite.STRICT)
-                                    .build();
+                                .name("id_token")
+                                .value(cognitoResponse.idToken())
+                                .maxAge(Duration.ofHours(1).toSeconds())
+                                .sameSite(Cookie.SameSite.STRICT)
+                                .build();
 
                             return Optional.of(List.of(accessTokenCookie, idTokenCookie));
                         }

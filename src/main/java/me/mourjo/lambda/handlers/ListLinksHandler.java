@@ -1,19 +1,27 @@
 package me.mourjo.lambda.handlers;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.amazonaws.services.dynamodbv2.document.Index;
+import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.KeyAttribute;
+import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import me.mourjo.cognito.TokenParser;
 import me.mourjo.dto.LambdaResponse;
 import me.mourjo.utils.ParameterStore;
 
-import java.util.*;
-
 public class ListLinksHandler implements RequestHandler<Map<String, ?>, LambdaResponse> {
-    final Table table =  new DynamoDB(AmazonDynamoDBClientBuilder.defaultClient()).getTable(ParameterStore.dynamoDbTableName());
+
+    final Table table = new DynamoDB(AmazonDynamoDBClientBuilder.defaultClient()).getTable(
+        ParameterStore.dynamoDbTableName());
     final Index userIndex = table.getIndex("user-index");
     final TokenParser tokenParser = new TokenParser();
 
@@ -24,10 +32,10 @@ public class ListLinksHandler implements RequestHandler<Map<String, ?>, LambdaRe
         Optional<String> email = tokenParser.emailFromHeaders(input);
         if (email.isPresent()) {
             return LambdaResponse.builder()
-                    .statusCode(200)
-                    .body(Map.of("userEmail", email.get(), "links", getLinks(email.get())))
-                    .cookies(tokenParser.refreshedCookies(input))
-                    .build();
+                .statusCode(200)
+                .body(Map.of("userEmail", email.get(), "links", getLinks(email.get())))
+                .cookies(tokenParser.refreshedCookies(input))
+                .build();
         }
 
         return LambdaResponse.builder().statusCode(401).build();

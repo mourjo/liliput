@@ -9,13 +9,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.RSAKeyProvider;
-import me.mourjo.utils.ParameterStore;
-import software.amazon.awssdk.regions.Region;
-
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import me.mourjo.utils.ParameterStore;
+import software.amazon.awssdk.regions.Region;
 
 class KeyProvider implements RSAKeyProvider {
 
@@ -28,9 +27,9 @@ class KeyProvider implements RSAKeyProvider {
         // URL: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_XXXX/.well-known/jwks.json
         // the "/.well-known/jwks.json" will be appended by JwkProviderBuilder
         provider = new JwkProviderBuilder(issuerUrl)
-                .cached(10, 24, TimeUnit.HOURS)
-                .rateLimited(10, 1, TimeUnit.MINUTES)
-                .build();
+            .cached(10, 24, TimeUnit.HOURS)
+            .rateLimited(10, 1, TimeUnit.MINUTES)
+            .build();
     }
 
     String getIssuerUrl() {
@@ -42,7 +41,9 @@ class KeyProvider implements RSAKeyProvider {
         try {
             return (RSAPublicKey) provider.get(kid).getPublicKey();
         } catch (JwkException e) {
-            throw new RuntimeException(String.format("Failed to get JWT kid=%s from tokenSigningKeyUrl=%s", kid, issuerUrl), e);
+            throw new RuntimeException(
+                String.format("Failed to get JWT kid=%s from tokenSigningKeyUrl=%s", kid,
+                    issuerUrl), e);
         }
     }
 
@@ -62,11 +63,12 @@ public class CognitoTokenVerifier {
     private final JWTVerifier verifier;
 
     public CognitoTokenVerifier() {
-        var keyProvider = new KeyProvider(Region.US_EAST_2.toString(), ParameterStore.cognitoUserPool());
+        var keyProvider = new KeyProvider(Region.US_EAST_2.toString(),
+            ParameterStore.cognitoUserPool());
         var algorithm = Algorithm.RSA256(keyProvider);
         verifier = JWT.require(algorithm)
-                .withIssuer(keyProvider.getIssuerUrl())
-                .build();
+            .withIssuer(keyProvider.getIssuerUrl())
+            .build();
     }
 
     public boolean verify(String token) {

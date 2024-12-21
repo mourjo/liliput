@@ -8,7 +8,8 @@ public record Cookie(String name, String value, long maxAge, SameSite sameSite) 
     @Override
     public String toString() {
         return """
-                %s=%s; Max-Age=%s; SameSite=%s; Secure; HttpOnly""".formatted(name, value, maxAge, sameSite.toString());
+            %s=%s; Max-Age=%s; SameSite=%s; Secure; HttpOnly""".formatted(name, value, maxAge,
+            sameSite.toString());
     }
 
     public enum SameSite {

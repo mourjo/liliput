@@ -11,11 +11,10 @@ import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import java.util.Map;
 import me.mourjo.dto.LambdaResponse;
 import me.mourjo.utils.HashedUsers;
 import me.mourjo.utils.ParameterStore;
-
-import java.util.Map;
 
 public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaResponse> {
 
@@ -27,7 +26,8 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
 
     @Override
     public LambdaResponse handleRequest(Map<String, ?> input, Context context) {
-        if (input.containsKey("path") && input.get("path") != null && input.get("path") instanceof String) {
+        if (input.containsKey("path") && input.get("path") != null && input.get(
+            "path") instanceof String) {
             String[] shortLinkParts = ((String) input.get("path")).split("/");
             String shortLink = shortLinkParts[shortLinkParts.length - 1];
 
@@ -36,12 +36,14 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
                 if (item != null && isExpandable(item)) {
                     String originalLink = item.getString("value");
                     updateUsageCount(shortLink);
-                    return LambdaResponse.builder().statusCode(302).locationHeader(originalLink).build();
+                    return LambdaResponse.builder().statusCode(302).locationHeader(originalLink)
+                        .build();
                 }
             }
         }
 
-        return LambdaResponse.builder().statusCode(404).body(Map.of("message", "Not found")).build();
+        return LambdaResponse.builder().statusCode(404).body(Map.of("message", "Not found"))
+            .build();
     }
 
     boolean isExpandable(Item item) {
@@ -51,10 +53,10 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
 
     void updateUsageCount(String shortLink) {
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()
-                .withPrimaryKey("key", shortLink)
-                .withUpdateExpression("SET #countV = if_not_exists(#countV, :defaultVal) + :val")
-                .withNameMap(new NameMap().with("#countV", "usageCount"))
-                .withValueMap(new ValueMap().withNumber(":val", 1).withNumber(":defaultVal", 0));
+            .withPrimaryKey("key", shortLink)
+            .withUpdateExpression("SET #countV = if_not_exists(#countV, :defaultVal) + :val")
+            .withNameMap(new NameMap().with("#countV", "usageCount"))
+            .withValueMap(new ValueMap().withNumber(":val", 1).withNumber(":defaultVal", 0));
         table.updateItem(updateItemSpec);
     }
 }

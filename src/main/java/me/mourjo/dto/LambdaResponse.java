@@ -3,20 +3,19 @@ package me.mourjo.dto;
 import com.amazonaws.util.json.Jackson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public record LambdaResponse(
-        int statusCode,
+    int statusCode,
 
-        @JsonInclude(JsonInclude.Include.NON_NULL)
-        Map<String, List<String>> multiValueHeaders,
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    Map<String, List<String>> multiValueHeaders,
 
-        @JsonInclude(JsonInclude.Include.NON_NULL)
-        String body) {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String body) {
 
     public static LambdaResponseBuilder builder() {
         return new LambdaResponseBuilder();
@@ -76,7 +75,8 @@ public record LambdaResponse(
         public LambdaResponse build() {
             Map<String, List<String>> multiValueHeaders = new HashMap<>();
             if (!cookies.isEmpty()) {
-                multiValueHeaders.put("Set-Cookie", cookies.stream().map(Object::toString).toList());
+                multiValueHeaders.put("Set-Cookie",
+                    cookies.stream().map(Object::toString).toList());
             }
 
             if (!singleValueHeaders.isEmpty()) {

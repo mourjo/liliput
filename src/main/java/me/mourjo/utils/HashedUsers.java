@@ -1,12 +1,12 @@
 package me.mourjo.utils;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class HashedUsers {
+
     private static final String FILE_NAME = "verified_users.txt";
     private static final Set<String> verifiedUserHashes = HashedUsers.readVerifiedUserHashes();
 
@@ -23,7 +23,7 @@ public class HashedUsers {
     }
 
     public static boolean isVerified(String email) {
-        if (email != null ) {
+        if (email != null) {
             var hash = HashGenerator.hash(email);
             return hash.isPresent() && verifiedUserHashes.contains(hash.get());
         }
