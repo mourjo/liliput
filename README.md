@@ -41,6 +41,7 @@ here: https://liliput.mourjo.me
 
 ## Visiting a short link
 
+- By default, a link can be expanded 25 times - to prevent spam usage, but verified users have unlimited access
 - Anonymous users can visit existing shortlinks
 - A Lambda function fetches the original link from DynamoDB and redirects the user to it
 
