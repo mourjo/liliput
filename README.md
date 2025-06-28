@@ -9,7 +9,7 @@ https://liliput.mourjo.me
 - Short links can be visited without signing in
 - Rudimentary statistics viewable by the creator - number of visits
 
-![sequence.svg](https://raw.githubusercontent.com/mourjo/diagrams/master/liliput_blog_images/out/high_level_sequence.svg)
+![sequence.svg](images/liliput_blog_images/out/high_level_sequence.svg)
 
 # Demo
 
@@ -27,7 +27,7 @@ here: https://liliput.mourjo.me
 - A single HTML page is served from S3 which then makes XHR requests for getting the current user's
   links and creating new short links
 
-<img src="https://raw.githubusercontent.com/mourjo/diagrams/master/liliput_blog_images/out/lambda_1_index_html.svg" width="250px">
+<img src="images/liliput_blog_images/out/lambda_1_index_html.svg" width="250px">
 
 ## Homepage: Showing list of previously created links
 
@@ -37,7 +37,7 @@ here: https://liliput.mourjo.me
 - Creation of a new short link is similar to this flow, except a link is inserted into DynamoDB
   instead of reading from it.
 
-<img src="https://raw.githubusercontent.com/mourjo/diagrams/master/liliput_blog_images/out/lambda_2_list_links.svg" width="450px">
+<img src="images/liliput_blog_images/out/lambda_2_list_links.svg" width="450px">
 
 ## Visiting a short link
 
@@ -45,7 +45,7 @@ here: https://liliput.mourjo.me
 - Anonymous users can visit existing shortlinks
 - A Lambda function fetches the original link from DynamoDB and redirects the user to it
 
-<img src="https://raw.githubusercontent.com/mourjo/diagrams/master/liliput_blog_images/out/lambda_4_expand_link.svg" width="250px">
+<img src="images/liliput_blog_images/out/lambda_4_expand_link.svg" width="250px">
 
 ## Authentication flow with AWS Cognito
 
@@ -56,7 +56,7 @@ here: https://liliput.mourjo.me
 - [Hardened (http-only) cookies](https://www.freecodecamp.org/news/web-security-hardening-http-cookies-be8d8d8016e1/)
   are used to enhance security
 
-![auth_sequence.svg](https://raw.githubusercontent.com/mourjo/diagrams/master/liliput_blog_images/out/auth_sequence.svg)
+![auth_sequence.svg](images/liliput_blog_images/out/auth_sequence.svg)
 
 ## Custom domain
 
