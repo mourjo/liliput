@@ -66,6 +66,10 @@ here: https://liliput.mourjo.me
 
 ![auth_sequence.svg](images/auth_sequence.svg)
 
+All cookies are HTTP-only and secure:
+
+<img src="images/cookies.png" width="650px">
+
 ## Custom domain
 
 - AWS cognito
