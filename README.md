@@ -1,4 +1,4 @@
-# Liliput: Serverless shortlinks on AWS
+# Liliput: Secure Serverless Shortlinks on AWS
 
 This is a project that shortens links, built on AWS. This is deployed here:
 https://liliput.mourjo.me
@@ -8,8 +8,16 @@ https://liliput.mourjo.me
 - Authenticated users can create new short links
 - Short links can be visited without signing in
 - Rudimentary statistics viewable by the creator - number of visits
+- Limited number of expansions
 
 ![sequence.svg](images/high_level_sequence.svg)
+
+## Why this is secure?
+
+- To create short links, you need a valid Google account
+- Signing in to Google uses the Oauth 2.0 (using [PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce))
+- All [session cookies are HTTP-only](images/cookies.png) (so no script can access it)
+- Links can only be expanded 25 times to prevent misuse, unless the user is verified
 
 # Demo
 
