@@ -1,5 +1,7 @@
 package me.mourjo.lambda.handlers;
 
+import java.util.Map;
+
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -11,7 +13,6 @@ import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import java.util.Map;
 import me.mourjo.dto.LambdaResponse;
 import me.mourjo.utils.HashedUsers;
 import me.mourjo.utils.ParameterStore;
@@ -26,8 +27,8 @@ public class ExpandLinkHandler implements RequestHandler<Map<String, ?>, LambdaR
 
     @Override
     public LambdaResponse handleRequest(Map<String, ?> input, Context context) {
-        if (input.containsKey("path") && input.get("path") != null && input.get(
-            "path") instanceof String) {
+        if (input.containsKey("path") && input.get("path") != null
+            && input.get("path") instanceof String) {
             String[] shortLinkParts = ((String) input.get("path")).split("/");
             String shortLink = shortLinkParts[shortLinkParts.length - 1];
 

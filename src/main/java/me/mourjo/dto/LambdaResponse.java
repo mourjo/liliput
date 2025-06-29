@@ -1,12 +1,13 @@
 package me.mourjo.dto;
 
-import com.amazonaws.util.json.Jackson;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import com.amazonaws.util.json.Jackson;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public record LambdaResponse(
     int statusCode,

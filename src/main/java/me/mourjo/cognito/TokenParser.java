@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import me.mourjo.dto.Cookie;
 import me.mourjo.utils.CookieUtils;
 
@@ -16,11 +17,11 @@ public class TokenParser {
     public Optional<String> emailFromHeaders(Map<String, ?> rawInput) {
 
         // principal sent by authorizer in requestContext
-        if (rawInput.containsKey("requestContext") && rawInput.get(
-            "requestContext") instanceof Map) {
+        if (rawInput.containsKey("requestContext")
+            && rawInput.get("requestContext") instanceof Map) {
             Map<String, ?> requestContext = (Map<String, ?>) rawInput.get("requestContext");
-            if (requestContext.containsKey("authorizer") && requestContext.get(
-                "authorizer") instanceof Map) {
+            if (requestContext.containsKey("authorizer")
+                && requestContext.get("authorizer") instanceof Map) {
                 Map<String, ?> authorizer = (Map<String, ?>) requestContext.get("authorizer");
                 if (authorizer.get("principalId") != null) {
                     return Optional.of((String) authorizer.get("principalId"));

@@ -1,10 +1,11 @@
 package me.mourjo.lambda.handlers;
 
+import java.util.List;
+import java.util.Map;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import java.util.List;
-import java.util.Map;
 import me.mourjo.cognito.CognitoTokenVerifier;
 import me.mourjo.utils.CookieUtils;
 

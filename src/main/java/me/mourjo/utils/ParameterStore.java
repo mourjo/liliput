@@ -2,6 +2,7 @@ package me.mourjo.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
 

@@ -1,5 +1,10 @@
 package me.mourjo.cognito;
 
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
 import com.auth0.jwk.JwkException;
 import com.auth0.jwk.JwkProvider;
 import com.auth0.jwk.JwkProviderBuilder;
@@ -9,10 +14,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.RSAKeyProvider;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import me.mourjo.utils.ParameterStore;
 import software.amazon.awssdk.regions.Region;
 

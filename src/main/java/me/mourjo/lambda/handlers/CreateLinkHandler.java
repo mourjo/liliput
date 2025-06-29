@@ -1,5 +1,11 @@
 package me.mourjo.lambda.handlers;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Instant;
+import java.util.Map;
+import java.util.Optional;
+
 import static me.mourjo.utils.RandomStringGenerator.generateRandomString;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -18,11 +24,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.util.json.Jackson;
 import com.fasterxml.jackson.core.JacksonException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.Instant;
-import java.util.Map;
-import java.util.Optional;
 import me.mourjo.cognito.TokenParser;
 import me.mourjo.dto.LambdaResponse;
 import me.mourjo.utils.ParameterStore;
