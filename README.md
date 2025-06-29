@@ -25,6 +25,15 @@ https://liliput.mourjo.me
 
 [![Liliput Walkthrough](images/play.png)](https://youtu.be/EzdWG2OjYpE)
 
+## Flow of logic
+
+| Month                                            | Savings                                         |
+|--------------------------------------------------|-------------------------------------------------|
+| <img src="images/flowchart_01_homepage.svg">     | <img src="images/flowchart_02_create_link.svg"> |
+| <img src="images/flowchart_03_expand_link.svg">  |                                                 |
+
+
+
 # Implementation
 
 Following are the major implementation pieces - all built on AWS and deployed
