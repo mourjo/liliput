@@ -27,10 +27,10 @@ https://liliput.mourjo.me
 
 ## Flow of logic
 
-| Month                                            | Savings                                         |
+| Logged in Flows                                  | Anonymous flows                                 |
 |--------------------------------------------------|-------------------------------------------------|
-| <img src="images/flowchart_01_homepage.svg">     | <img src="images/flowchart_02_create_link.svg"> |
-| <img src="images/flowchart_03_expand_link.svg">  |                                                 |
+| <img src="images/flowchart_01_homepage.svg">     | <img src="images/flowchart_03_expand_link.svg"> |
+| <img src="images/flowchart_02_create_link.svg">  |                                                 |
 
 
 
